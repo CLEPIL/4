@@ -9,6 +9,7 @@
 
 <script>
 import { getDatabase, ref, set } from 'firebase/database'
+import addMessage from '@/api'
 export default {
   data () {
     return {
@@ -16,12 +17,13 @@ export default {
       age: 30
     }
   },
-  async mounted () {
+  mounted () {
     // eslint-disable-next-line no-console
     console.log(Object.keys(this.$route.query))
     if (Object.keys(this.$route.query).includes('code')) {
       // eslint-disable-next-line no-console
       console.log(this.$route.query.code)
+      /*
       const url = 'https://auth.worksmobile.com/oauth2/v2.0/token'
       const headers = new Headers({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -34,13 +36,15 @@ export default {
         client_secret: 'rBx0cEoeGf'
       }
       const metadataUrl = url + '?' + MetadataToUrl(details)
-      const response = await fetch(metadataUrl, {
-        method: 'POST',
-        headers
-      })
       // eslint-disable-next-line no-console
-      console.log(response)
+      console.log(metadataUrl)
+      */
     }
+    // eslint-disable-next-line no-console
+    addMessage({ text: 'messageText' }).then((result) => {
+      // eslint-disable-next-line no-console
+      console.log(result)
+    })
   },
   methods: {
     watchdb () {
