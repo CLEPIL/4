@@ -1,10 +1,11 @@
 import { initializeApp } from 'firebase/app'
 import { getFunctions, httpsCallable } from 'firebase/functions'
+import apiConfig from './api_config'
 
 const app = initializeApp({
-  projectId: 'blaze-lab-75c62',
-  apiKey: 'AIzaSyARYmwkEzz0WY6LCzToU0t9Kb2uXirbfVI',
-  authDomain: 'blaze-lab-75c62.firebaseapp.com'
+  projectId: apiConfig.projectId,
+  apiKey: apiConfig.apiKey,
+  authDomain: apiConfig.authDomain
 })
 const functions = getFunctions(app)
 const addMessage = httpsCallable(functions, 'addMessage')
