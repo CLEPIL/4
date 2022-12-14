@@ -21,30 +21,11 @@ export default {
     // eslint-disable-next-line no-console
     console.log(Object.keys(this.$route.query))
     if (Object.keys(this.$route.query).includes('code')) {
-      // eslint-disable-next-line no-console
-      console.log(this.$route.query.code)
-      /*
-      const url = 'https://auth.worksmobile.com/oauth2/v2.0/token'
-      const headers = new Headers({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': '*'
+      addMessage({ code: this.$route.query.code }).then((result) => {
+        // eslint-disable-next-line no-console
+        console.log(result)
       })
-      const details = {
-        code: this.$route.query.code,
-        grant_type: 'authorization_code',
-        client_id: '6e1AHqNUbTld9yATwwv3',
-        client_secret: 'rBx0cEoeGf'
-      }
-      const metadataUrl = url + '?' + MetadataToUrl(details)
-      // eslint-disable-next-line no-console
-      console.log(metadataUrl)
-      */
     }
-    // eslint-disable-next-line no-console
-    addMessage({ text: 'messageText' }).then((result) => {
-      // eslint-disable-next-line no-console
-      console.log(result)
-    })
   },
   methods: {
     watchdb () {
@@ -82,7 +63,6 @@ function MetadataToUrl (metadata) {
   const formBody = formBodyArr.join('&')
   return formBody
 }
-
 </script>
 
 <style>
