@@ -31,6 +31,9 @@ exports.addMessage = functions.https.onCall((data, context) => {
   }
   const metadataUrl = url + '?' + MetadataToUrl(details)
   return axios.post(metadataUrl, details, config).then((response) => {
-    return response.data
+    return {
+      status: response.status,
+      data: response.data
+    }
   })
 })
