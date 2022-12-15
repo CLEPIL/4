@@ -31,9 +31,27 @@ exports.addMessage = functions.https.onCall((data, context) => {
   }
   const metadataUrl = url + '?' + MetadataToUrl(details)
   return axios.post(metadataUrl, details, config).then((response) => {
-    return {
-      status: response.status,
-      data: response.data
+    if (response.status === 200) {
+      const config = {
+        headers: {
+          Authorization: 'Bearer ' + response.data.access_token
+        }
+      }
+      return axios.get('https://www.worksapis.com/v1.0/users/me', config).then((result) => {
+        // eslint-disable-next-line no-console
+        console.log(result)
+        return {
+          status: result.status,
+          user: result.data,
+          access_token: response.data.access_token,
+          refresh_token: response.data.refresh_token,
+          expires_in: response.data.expires_in
+        }
+      })
+    } else {
+      return {
+        status: response.status
+      }
     }
   })
 })
