@@ -69,7 +69,7 @@ typings/
 .nuxt
 
 # Nuxt generate
-dist
+public
 
 # vuepress build output
 .vuepress/dist
@@ -88,3 +88,6 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# api config
+api_config.js
