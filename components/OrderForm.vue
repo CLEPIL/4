@@ -18,7 +18,7 @@
             v-on="on"
           />
         </template>
-        <v-date-picker v-model="picker" @input="formatDate(picker)" />
+        <v-date-picker v-model="picker" locale="jp-ja" :day-format="(date) => new Date(date).getDate()" @input="formatDate(picker)" />
       </v-menu>
     </v-col>
   </v-row>

@@ -50,6 +50,9 @@
       </v-btn>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
+      <v-btn class="cen" @click="loginAccess">
+        login
+      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -95,6 +98,29 @@ export default {
       rightDrawer: false,
       title: 'Vchat'
     }
+  },
+  methods: {
+    loginAccess () {
+      const details = {
+        client_id: '6e1AHqNUbTld9yATwwv3',
+        redirect_uri: 'http://localhost:3000',
+        scope: 'user.profile.read',
+        response_type: 'code',
+        state: 'aBcDeF'
+      }
+      const url = 'https://auth.worksmobile.com/oauth2/v2.0/authorize'
+      location.href = url + '?' + MetadataToUrl(details)
+    }
   }
+}
+function MetadataToUrl (metadata) {
+  const formBodyArr = []
+  for (const property in metadata) {
+    const encodedKey = encodeURIComponent(property)
+    const encodedValue = encodeURIComponent(metadata[property])
+    formBodyArr.push(encodedKey + '=' + encodedValue)
+  }
+  const formBody = formBodyArr.join('&')
+  return formBody
 }
 </script>

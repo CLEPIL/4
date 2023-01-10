@@ -40,8 +40,25 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    [
+      '@nuxtjs/firebase',
+      {
+        config: {
+          apiKey: 'AIzaSyARYmwkEzz0WY6LCzToU0t9Kb2uXirbfVI',
+          authDomain: 'blaze-lab-75c62.firebaseapp.com',
+          databaseURL: 'https://blaze-lab-75c62-default-rtdb.asia-southeast1.firebasedatabase.app',
+          projectId: 'blaze-lab-75c62',
+          storageBucket: 'blaze-lab-75c62.appspot.com',
+          messagingSenderId: '13282407977',
+          appId: '1:13282407977:web:2659196867980f64ab8e38',
+          measurementId: 'G-64YE84LF2P'
+        },
+        services: {
+          auth: true,
+          functions: true
+        }
+      }
+    ]
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -57,6 +74,15 @@ export default {
       dark: true,
       themes: {
         dark: {
+          primary: colors.blue.darken2,
+          accent: colors.grey.darken3,
+          secondary: colors.amber.darken3,
+          info: colors.teal.lighten1,
+          warning: colors.amber.base,
+          error: colors.deepOrange.accent4,
+          success: colors.green.accent3
+        },
+        light: {
           primary: colors.blue.darken2,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,

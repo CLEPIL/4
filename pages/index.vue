@@ -1,23 +1,27 @@
 <template>
   <div>
-    使い方をここに書く？書かない。
-    <v-btn @click="loginAccess">
-      CLICK
-    </v-btn>
+    <v-row v-if="first_name != null">
+      ようこそ{{ first_name }}さん
+    </v-row>
   </div>
 </template>
 
 <script>
 import { getDatabase, ref, set } from 'firebase/database'
-import addMessage from '@/api'
+import { getFunctions, httpsCallable } from 'firebase/functions'
+
 export default {
   data () {
     return {
       count: 0,
-      age: 30
+      age: 30,
+      email: null,
+      first_name: null
     }
   },
   async mounted () {
+    const functions = getFunctions()
+    const addMessage = httpsCallable(functions, 'addMessage')
     if (Object.keys(this.$route.query).includes('code')) {
       const result = await addMessage({ code: this.$route.query.code })
       if (result.data.status === 200) {
@@ -41,6 +45,7 @@ export default {
         console.log('user')
         // eslint-disable-next-line no-console
         console.log(user)
+        this.first_name = user.userName.lastName
       }
       // eslint-disable-next-line no-console
       console.log(result)
@@ -82,7 +87,7 @@ export default {
     loginAccess () {
       const details = {
         client_id: '6e1AHqNUbTld9yATwwv3',
-        redirect_uri: 'http://localhost:3000',
+        redirect_uri: 'http://localhost:3000/',
         scope: 'user.profile.read',
         response_type: 'code',
         state: 'aBcDeF'
@@ -106,5 +111,7 @@ function MetadataToUrl (metadata) {
 </script>
 
 <style>
-
+.center{
+  text-align: center;
+}
 </style>
