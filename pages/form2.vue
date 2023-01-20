@@ -1,7 +1,7 @@
 <template>
   <v-app>
+    ID : {{ this.$store.state.todo.Udata.email }}
     <v-form class="form">
-      ID<v-text-field v-model="id" />
       <v-row class="isCheck">
         選択中: {{ checkbox }}
       </v-row>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { getDatabase, ref, update, get, child } from 'firebase/database'
+import { getDatabase, set, ref, update, get, child } from 'firebase/database'
 export default {
   data () {
     return {
@@ -81,8 +81,16 @@ export default {
     wtInt () {
       const db = getDatabase()
       // eslint-disable-next-line no-console
-      update(ref(db, 'int/' + this.id), {
-        check: this.checkbox
+      update(ref(db, 'int/' + this.$store.state.todo.Udata.email), {
+        check: this.checkbox,
+        id: this.$store.state.todo.Udata.email
+      })
+    },
+    rvage () {
+      const db = getDatabase()
+      // eslint-disable-next-line no-console
+      set(ref(db, 'vages/'), {
+        choices: ['ニンジン', 'ネギ', '大根']
       })
     }
   }

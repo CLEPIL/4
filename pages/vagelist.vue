@@ -3,11 +3,22 @@
     <v-row>
       <v-col>注文一覧</v-col>
       <v-col cols="12">
-        <v-data-table :search="search" :headers="headers" :items="items" />
+        <v-data-table locale="jp-ja" :headers="headers" :items="items">
+          <template #[`item.link`]="{ item }">
+            <v-btn :href="item.link"> 連絡 </v-btn>
+          </template>
+          <template #[`item.delete`]="{ item }">
+            <v-btn small color="0" @click="deleteItem(item)"> 承認 </v-btn>
+          </template>
+        </v-data-table>
       </v-col>
+    </v-row>
+    <v-row>
+      <router-link to="/edi"> 編集 </router-link>
     </v-row>
   </v-container>
 </template>
+
 <script>
 import { getDatabase, ref, child, get } from 'firebase/database'
 export default {
@@ -15,26 +26,22 @@ export default {
     return {
       headers: [
         { text: 'ID', value: 'id' },
-        { text: '野菜', value: 'yasai' },
-        { text: '数量', value: 'weight' },
-        { text: '受取日時', value: 'date' }
+        { text: '野菜', value: 'check' },
+        { text: '連絡', value: 'link' }
       ],
-      items: [],
-      search: null
+      items: []
     }
   },
   mounted () {
-    this.search = this.$store.state.todo.Udata.email
-    console.log(this.search)
     // eslint-disable-next-line no-console
     const dbRef = ref(getDatabase())
-    get(child(dbRef, 'orders'))
+    get(child(dbRef, 'int'))
       .then((snapshot) => {
         if (snapshot.exists()) {
           // eslint-disable-next-line no-console
           console.log(snapshot.val())
-          const orders = snapshot.val()
-          Object.keys(orders).forEach(k => this.items.push(orders[k]))
+          const int = snapshot.val()
+          Object.keys(int).forEach(k => this.items.push(int[k]))
         } else {
           // eslint-disable-next-line no-console
           console.log('No data available')
@@ -44,10 +51,17 @@ export default {
         // eslint-disable-next-line no-console
         console.error(error)
       })
+  },
+  methods: {
+    deleteItem (item) {
+      const index = this.items.indexOf(item)
+      confirm('この注文を承認しますか？') && this.items.splice(index, 1)
+    }
   }
 }
 </script>
-  <style>
+
+<style>
 .tittle {
   color: #000000;
   text-align: center;

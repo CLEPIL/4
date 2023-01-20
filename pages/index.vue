@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-row v-if="first_name != null">
+    <v-col v-if="first_name != null" class="center">
       ようこそ{{ first_name }}さん
-    </v-row>
+    </v-col>
   </div>
 </template>
 
@@ -45,6 +45,7 @@ export default {
         console.log('user')
         // eslint-disable-next-line no-console
         console.log(user)
+        this.$store.commit('todo/changeUdata', user)
         this.first_name = user.userName.lastName
       }
       // eslint-disable-next-line no-console
@@ -94,6 +95,13 @@ export default {
       }
       const url = 'https://auth.worksmobile.com/oauth2/v2.0/authorize'
       location.href = url + '?' + MetadataToUrl(details)
+    },
+    name () {
+      console.log(this.$store.state.todo.name)
+      this.$store.commit('todo/changeUdata', this.user)
+    },
+    k () {
+      console.log(this.$store.state.todo.Udata)
     }
   }
 }

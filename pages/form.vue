@@ -2,7 +2,7 @@
   <v-app>
     <v-form v-model="isValid" class="form">
       <v-row>
-        ID<v-text-field v-model="id" />
+        ID : {{ this.$store.state.todo.Udata.email }}
       </v-row>
       <v-row>
         <v-col> 野菜 </v-col>
@@ -125,8 +125,8 @@ export default {
       const db = getDatabase()
       // eslint-disable-next-line no-console
       push(ref(db, 'orders/'), {
-        id: this.id,
-        link: 'https://line.worksmobile.com/message/send?version=18&message=&emailList=' + this.id,
+        id: this.$store.state.todo.Udata.email,
+        link: 'https://line.worksmobile.com/message/send?version=18&message=&emailList=' + this.$store.state.todo.Udata.email,
         yasai: this.yasai,
         weight: this.weight,
         date: this.picker,

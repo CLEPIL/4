@@ -30,24 +30,6 @@
       app
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="clipped = !clipped"
-      >
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn
-        icon
-        @click.stop="fixed = !fixed"
-      >
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
       <v-btn class="cen" @click="loginAccess">
@@ -79,17 +61,22 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
+          title: 'ホーム',
           to: '/'
         },
         {
           icon: 'mdi-form-select',
-          title: 'form',
+          title: '飲食店',
           to: '/form'
         },
         {
+          icon: 'mdi-form-select',
+          title: '生産者',
+          to: '/form2'
+        },
+        {
           icon: 'mdi-format-list-bulleted',
-          title: 'history',
+          title: '注文履歴',
           to: '/history'
         }
       ],
@@ -103,7 +90,7 @@ export default {
     loginAccess () {
       const details = {
         client_id: '6e1AHqNUbTld9yATwwv3',
-        redirect_uri: 'http://localhost:3000',
+        redirect_uri: 'https://blaze-lab-75c62.web.app',
         scope: 'user.profile.read',
         response_type: 'code',
         state: 'aBcDeF'
