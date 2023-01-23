@@ -1,18 +1,18 @@
 <template>
   <v-app>
-    <v-container style="margin-top: 20px; width: 500px">
+    <v-container style="margin-top: 20px; width: auto">
       <v-stepper v-model="e1">
         <v-stepper-header>
           <v-stepper-step :complete="e1 > 1" step="1">
-            ステップ1
+            種類選択
           </v-stepper-step>
           <v-divider />
           <v-stepper-step :complete="e1 > 2" step="2">
-            ステップ2
+            価格設定
           </v-stepper-step>
           <v-divider />
           <v-stepper-step step="3">
-            ステップ3
+            確認
           </v-stepper-step>
         </v-stepper-header>
 
@@ -39,9 +39,6 @@
             <v-btn color="primary" @click="e1 = 2">
               次へ
             </v-btn>
-            <v-btn text>
-              キャンセル
-            </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
@@ -53,7 +50,7 @@
             <v-btn color="primary" @click="e1 = 3">
               次へ
             </v-btn>
-            <v-btn text>
+            <v-btn @click="e1 = 1">
               キャンセル
             </v-btn>
           </v-stepper-content>
@@ -64,10 +61,10 @@
                 <v-list-item-title>ステップ3内容</v-list-item-title>
               </v-list-item>
             </v-card>
-            <v-btn color="primary" @click="e1 = 1">
+            <v-btn color="primary">
               完了
             </v-btn>
-            <v-btn text>
+            <v-btn @click="e1 = 2">
               キャンセル
             </v-btn>
           </v-stepper-content>
