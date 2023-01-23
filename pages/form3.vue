@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container style="margin-top: 20px; width: auto">
+    <v-container style="margin-top: 20px; width: 500px">
       <v-stepper v-model="e1">
         <v-stepper-header>
           <v-stepper-step :complete="e1 > 1" step="1">

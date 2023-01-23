@@ -7,7 +7,7 @@
 export default {
   props: {
     // eslint-disable-next-line vue/require-default-prop
-    check: Object
+    check: String
   },
   data () {
     return {
