@@ -17,7 +17,7 @@
         </v-stepper-header>
 
         <v-stepper-items>
-          <v-stepper-content step="1">
+          <v-stepper-content step="1" class="pa-4">
             <v-card class="mb-12">
               <v-list-item>
                 <v-row>
@@ -44,9 +44,9 @@
             </v-btn>
           </v-stepper-content>
 
-          <v-stepper-content step="2">
+          <v-stepper-content step="2" class="pa-3">
             <v-card class="mb-12">
-              <v-list-item v-for="check in checkbox" :key="check" :check="check">
+              <v-list-item v-for="check in checkbox" :key="check" class="pa-0" :check="check">
                 <ValueSet :check="check" />
               </v-list-item>
             </v-card>
@@ -59,9 +59,9 @@
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-card class="mb-12" color="grey lighten-1" height="100px">
+            <v-card class="mb-12">
               <v-list-item>
-                <v-list-item-title>ステップ3内容</v-list-item-title>
+                
               </v-list-item>
             </v-card>
             <v-btn color="primary" @click="e1 = 1">
@@ -87,16 +87,9 @@ export default {
     return {
       e1: 1,
       id: null,
-      lists: [
-        { selected: 0, name: '要素1' },
-        { selected: 0, name: '要素2' },
-        { selected: 0, name: '要素3' },
-        { selected: 0, name: '要素4' },
-        { selected: 0, name: '要素5' },
-        { selected: 0, name: '要素6' }
-      ],
       checkbox: [],
       items: [],
+      inventory: [],
       dialog: false
     }
   },

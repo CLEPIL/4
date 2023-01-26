@@ -82,8 +82,7 @@ export default {
       const db = getDatabase()
       // eslint-disable-next-line no-console
       update(ref(db, 'int/' + this.$store.state.todo.Udata.email), {
-        check: this.checkbox,
-        id: this.$store.state.todo.Udata.email
+        check: this.checkbox
       })
     },
     rvage () {
