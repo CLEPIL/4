@@ -59,12 +59,15 @@
 
           <v-stepper-content step="3">
             <v-card class="mb-12">
+              <v-col>
+                下記の内容で更新します。よろしいですか？
+              </v-col>
               <v-col v-for="inv in inventory" :key="inv.name">
                 {{ inv.name }}: {{ inv.value }}円/kg
               </v-col>
             </v-card>
             <v-btn color="primary" @click="WrightZaiko()">
-              完了
+              更新
             </v-btn>
             <v-dialog v-model="dialog" title="更新完了">
               <v-card>
@@ -98,7 +101,7 @@ export default {
       items: [],
       inventory: [],
       headers: [],
-      dialog: true
+      dialog: false
     }
   },
   mounted () {
@@ -129,6 +132,7 @@ export default {
       })
     },
     WrightZaiko () {
+      this.dialog = true
       const db = getDatabase()
       update(ref(db, 'int/' + 'testman'), {
         zaiko: this.inventory
