@@ -67,7 +67,7 @@ export default {
         {
           icon: 'mdi-form-select',
           title: '飲食店',
-          to: '/form'
+          to: '/form5'
         },
         {
           icon: 'mdi-form-select',

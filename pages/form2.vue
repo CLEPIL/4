@@ -1,7 +1,7 @@
 <template>
   <v-app>
     ID : {{ this.$store.state.todo.Udata.email }}
-    <v-container style="margin-top: 20px; width: 500px">
+    <v-container style="margin-top: 20px; width: 90vw">
       <v-stepper v-model="e1">
         <v-stepper-header>
           <v-stepper-step :complete="e1 > 1" step="1">
