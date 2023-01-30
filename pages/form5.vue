@@ -65,7 +65,7 @@
                   重量
                 </v-col>
                 <v-col cols="4" class="pa-0">
-                  <v-text-field v-model.number="value" inputmode="numeric" class="right" @change="value_change" />
+                  <v-text-field v-model.number="weight" inputmode="numeric" class="right" @change="value_change" />
                 </v-col>
                 <v-col cols="4" align-self="center" class="pl-1">
                   kg
