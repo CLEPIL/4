@@ -19,7 +19,7 @@
 
         <v-stepper-items>
           <v-stepper-content step="1" class="pa-4">
-            <v-card class="mb-12">
+            <v-card class="item-list">
               <v-list-item>
                 <v-row>
                   <v-col
@@ -142,7 +142,7 @@ export default {
       const db = getDatabase()
       // eslint-disable-next-line no-console
       set(ref(db, 'vages/'), {
-        choices: ['ニンジン', 'ネギ', '大根']
+        choices: ['リーキ', 'ベルギーエシャロット（訳あり）', 'ケール', 'サニーレタス', 'アイスプラント', '小松菜', 'アスパラ菜', '菜花', 'つぼみ菜', '葉わさび', '根わさび', 'ちぢみ雪菜', '寒じめほうれん草', 'ほうれん草', 'カブ', '黒大根', '紅芯大根', 'ジャガイモ／メークイン', 'ジャガイモ／シャドークイン', 'ジャガイモ／十勝こがね', 'ヤーコン', '里芋', '菊芋', '銀杏', 'とうがらし', '青豆', '黒あずき', 'キクラゲ', 'ヒラタケ', 'シイタケ(菌床)', 'シイタケ(原木)', '小ネギ', 'さつまいも／紅はるか', 'さつまいも／シルクスイート']
       })
     },
     changedValue (value, index) {
@@ -166,3 +166,9 @@ export default {
   }
 }
 </script>
+<style>
+.item-list {
+  height: 70vh;
+  overflow-y: auto;
+}
+</style>

@@ -14,9 +14,9 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'ID', value: 'id' },
-        { text: '野菜', value: 'yasai' },
+        { text: '野菜', value: 'vegetable' },
         { text: '数量', value: 'weight' },
+        { text: 'お支払金額', value: 'price' },
         { text: '受取日時', value: 'date' }
       ],
       items: [],

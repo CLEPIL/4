@@ -126,7 +126,7 @@ export default {
       // eslint-disable-next-line no-console
       push(ref(db, 'orders/'), {
         id: this.$store.state.todo.Udata.email,
-        link: 'https://line.worksmobile.com/message/send?version=18&message=&emailList=' + this.$store.state.todo.Udata.email,
+        link: 'https://line.worksmobile.com/message/send?version=18&message=&emailList=' + this.id,
         yasai: this.yasai,
         weight: this.weight,
         date: this.picker,
