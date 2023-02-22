@@ -18,7 +18,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <router-link to="/edi">
+      <router-link to="/manager/edi">
         編集
       </router-link>
     </v-row>
@@ -32,7 +32,7 @@ export default {
     return {
       headers: [
         { text: 'ID', value: 'id' },
-        { text: '野菜', value: 'yasai' },
+        { text: '野菜', value: 'vegetable' },
         { text: '数量', value: 'weight' },
         { text: '受取日時', value: 'date' },
         { text: '連絡', value: 'link' }

@@ -73,12 +73,12 @@ export default {
           icon: 'mdi-form-select',
           title: '生産者',
           to: '/form2'
-        },
-        {
-          icon: 'mdi-format-list-bulleted',
-          title: '注文履歴',
-          to: '/history'
         }
+        // {
+        // icon: 'mdi-format-list-bulleted',
+        // title: '注文履歴',
+        // to: '/history'
+        // }
       ],
       miniVariant: false,
       right: true,

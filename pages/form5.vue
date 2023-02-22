@@ -33,7 +33,7 @@
                 />
               </v-row>
             </v-card>
-            <v-btn color="primary" @click="e1 = 2">
+            <v-btn color="primary" @click="getCheckVege">
               次へ
             </v-btn>
           </v-stepper-content>
@@ -46,14 +46,16 @@
               <v-row class="ma-4">
                 <v-select
                   v-model="n"
-                  :items="names"
+                  item-text="s"
+                  :items="test"
+                  return-object
                 />
               </v-row>
             </v-card>
             <v-btn color="primary" @click="e1 = 3">
               次へ
             </v-btn>
-            <v-btn @click="e1 = 1">
+            <v-btn @click="deleteS">
               キャンセル
             </v-btn>
           </v-stepper-content>
@@ -106,21 +108,28 @@
                 下記の内容でよろしいですか？
               </v-col>
               <v-col>
-                {{ yasai }}({{ n }}):{{ weight }}kg
+                {{ yasai }}({{ n.s }}):{{ weight }}kg
               </v-col>
               <v-col>
                 受取日時：{{ picker }}
               </v-col>
               <v-col>
-                お支払金額：{{ m }}円
+                お支払金額：{{ n.en * weight }}円
               </v-col>
             </v-card>
-            <v-btn color="primary" @click="e1 = 4">
+            <v-btn color="primary" @click="writeOrderdata">
               送信
             </v-btn>
             <v-btn @click="e1 = 3">
               キャンセル
             </v-btn>
+            <v-dialog v-model="dialog" title="更新完了">
+              <v-card>
+                <v-card-text class="update">
+                  送信を完了しました
+                </v-card-text>
+              </v-card>
+            </v-dialog>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -128,7 +137,7 @@
   </v-app>
 </template>
 <script>
-import { getDatabase, ref, push, get, child } from 'firebase/database'
+import { getDatabase, ref, push, get, child, update } from 'firebase/database'
 export default {
   data () {
     return {
@@ -136,21 +145,24 @@ export default {
       items: [],
       yasai: null,
       weight: null,
+      n: '',
       id: '',
-      m: '1200',
-      g: ['250', '500', '750', '1000'],
-      names: ['文字数文字数文字数', 'b', 'c'],
+      linkID: '',
+      names: [],
       menu: '',
       text: '',
       picker: null,
-      price: '200',
+      price: '',
       isValid: null,
-      e1: 1
+      e1: 1,
+      zData: [{ s: 'h1', en: 200 }, { s: 'h2', en: 300 }],
+      test: null,
+      dialog: false
     }
   },
   mounted () {
     const dbRef = ref(getDatabase())
-    get(child(dbRef, 'vages/choices'))
+    get(child(dbRef, 'vages/choiced'))
       .then((snapshot) => {
         if (snapshot.exists()) {
           // eslint-disable-next-line no-console
@@ -194,17 +206,63 @@ export default {
       return today <= new Date(val) && new Date(val) <= maxAllowedDay
     },
     writeOrderdata () {
+      this.linkID = this.$store.state.todo.Udata.email
+      this.price = this.n.en * this.weight
       const db = getDatabase()
       // eslint-disable-next-line no-console
       push(ref(db, 'orders/'), {
         id: this.$store.state.todo.Udata.email,
-        link: 'https://line.worksmobile.com/message/send?version=18&message=&emailList=' + this.$store.state.todo.Udata.email,
-        yasai: this.yasai,
+        link: 'https://line.worksmobile.com/message/send?version=18&message=&emailList=' + this.linkID,
+        vegetable: this.yasai + '(' + this.n.s + ')',
         weight: this.weight,
         date: this.picker,
-        jt: '未承認'
+        price: this.price
+      })
+      this.dialog = true
+    },
+    getCheckVege () {
+      const dbRef = ref(getDatabase())
+      get(child(dbRef, 'Vege/' + this.yasai))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+          // eslint-disable-next-line no-console
+            console.log(snapshot.val())
+            const vages = snapshot.val()
+            this.test = vages
+          } else {
+          // eslint-disable-next-line no-console
+            console.log('No data available')
+          }
+        })
+        .catch((error) => {
+        // eslint-disable-next-line no-console
+          console.error(error)
+        })
+      console.log(this.test)
+      this.e1 = 2
+    },
+    a () {
+      console.log(this.test)
+    },
+    deleteS () {
+      this.test = []
+      this.n = {}
+      this.yasai = null
+      this.e1 = 1
+    },
+    testVege () {
+      const db = getDatabase()
+      // eslint-disable-next-line no-console
+      update(ref(db, 'Vege/'), {
+        ほうれん草: this.zData
       })
     }
+    // async getUserID () {
+    //  const db = getDatabase()
+    //  const que = query(ref(db, '/int'), orderByChild('zaiko'))
+    //  const response = await get(que)
+    //  console.log(response)
+    // }
   }
 }
 </script>

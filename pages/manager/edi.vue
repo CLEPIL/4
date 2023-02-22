@@ -14,12 +14,12 @@
     </v-row>
     <v-row class="form">
       <v-col>
-        <v-btn link rel="stylesheet" href="/orderlist">
+        <v-btn link rel="stylesheet" href="/manager/orderlist">
           取消
         </v-btn>
       </v-col>
       <v-col>
-        <v-btn link rel="stylesheet" href="/orderlist" @click="weightUpdate">
+        <v-btn link rel="stylesheet" href="/manager/orderlist" @click="weightUpdate">
           更新
         </v-btn>
       </v-col>

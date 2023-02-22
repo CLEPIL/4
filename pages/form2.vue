@@ -134,8 +134,12 @@ export default {
     WrightZaiko () {
       this.dialog = true
       const db = getDatabase()
-      update(ref(db, 'int/' + 'testman'), {
-        zaiko: this.inventory
+      const zaikoObj = {}
+      this.inventory.forEach((e) => {
+        zaikoObj[e.name] = e.value
+      })
+      update(ref(db, 'int/' + this.$store.state.todo.Udata.userName.lastName + this.$store.state.todo.Udata.userName.firstName), {
+        zaiko: zaikoObj
       })
     },
     rvage () {
