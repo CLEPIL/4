@@ -31,9 +31,10 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'ID', value: 'id' },
+        { text: '注文者', value: 'uname' },
         { text: '野菜', value: 'vegetable' },
-        { text: '数量', value: 'weight' },
+        { text: '数量(kg)', value: 'weight' },
+        { text: '支払金額', value: 'price' },
         { text: '受取日時', value: 'date' },
         { text: '連絡', value: 'link' }
         // { text: '', value: 'delete', sortable: false }

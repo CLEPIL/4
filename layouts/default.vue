@@ -83,7 +83,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vchat'
+      title: 'いちのせき野菜アプリ'
     }
   },
   methods: {

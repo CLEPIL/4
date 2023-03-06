@@ -1,6 +1,11 @@
 <template>
   <v-app>
-    ID : {{ this.$store.state.todo.Udata.email }}
+    <h5 v-if="Uid == null" class="center">
+      ログインしてください
+    </h5>
+    <h5 v-if="Uid != null" class="center">
+      ID : {{ this.$store.state.todo.Udata.email }}
+    </h5>
     <v-container style="margin-top: 20px; width: 90vw">
       <v-stepper v-model="e1">
         <v-stepper-header>
@@ -50,6 +55,9 @@
                   :items="test"
                   return-object
                 />
+              </v-row>
+              <v-row class="ma-4">
+                値段：{{ n.en }}円/kg
               </v-row>
             </v-card>
             <v-btn color="primary" @click="e1 = 3">
@@ -162,7 +170,8 @@ export default {
   },
   mounted () {
     const dbRef = ref(getDatabase())
-    get(child(dbRef, 'vages/choiced'))
+    this.Uid = this.$store.state.todo.Udata.email
+    get(child(dbRef, 'can/choices'))
       .then((snapshot) => {
         if (snapshot.exists()) {
           // eslint-disable-next-line no-console
@@ -212,6 +221,7 @@ export default {
       // eslint-disable-next-line no-console
       push(ref(db, 'orders/'), {
         id: this.$store.state.todo.Udata.email,
+        uname: this.$store.state.todo.Udata.userName.lastName + this.$store.state.todo.Udata.userName.firstName,
         link: 'https://line.worksmobile.com/message/send?version=18&message=&emailList=' + this.linkID,
         vegetable: this.yasai + '(' + this.n.s + ')',
         weight: this.weight,
@@ -275,6 +285,9 @@ export default {
   text-align: center;
 }
 .button {
+  text-align: center;
+}
+.center{
   text-align: center;
 }
 </style>

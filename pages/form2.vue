@@ -1,6 +1,11 @@
 <template>
   <v-app>
-    ID : {{ this.$store.state.todo.Udata.email }}
+    <h5 v-if="Uid == null" class="center">
+      ログインしてください
+    </h5>
+    <h5 v-if="Uid != null" class="center">
+      ID : {{ this.$store.state.todo.Udata.email }}
+    </h5>
     <v-container style="margin-top: 20px; width: 90vw">
       <v-stepper v-model="e1">
         <v-stepper-header>
@@ -38,7 +43,7 @@
                 </v-row>
               </v-list-item>
             </v-card>
-            <v-btn color="primary" @click="e1 = 2">
+            <v-btn color="primary" @click="e1= 2">
               次へ
             </v-btn>
           </v-stepper-content>
@@ -101,11 +106,13 @@ export default {
       items: [],
       inventory: [],
       headers: [],
+      Uid: null,
       dialog: false
     }
   },
   mounted () {
     const dbRef = ref(getDatabase())
+    this.Uid = this.$store.state.todo.Udata.email
     get(child(dbRef, 'vages/choices'))
       .then((snapshot) => {
         if (snapshot.exists()) {
@@ -145,8 +152,8 @@ export default {
     rvage () {
       const db = getDatabase()
       // eslint-disable-next-line no-console
-      set(ref(db, 'vages/'), {
-        choices: ['リーキ', 'ベルギーエシャロット（訳あり）', 'ケール', 'サニーレタス', 'アイスプラント', '小松菜', 'アスパラ菜', '菜花', 'つぼみ菜', '葉わさび', '根わさび', 'ちぢみ雪菜', '寒じめほうれん草', 'ほうれん草', 'カブ', '黒大根', '紅芯大根', 'ジャガイモ／メークイン', 'ジャガイモ／シャドークイン', 'ジャガイモ／十勝こがね', 'ヤーコン', '里芋', '菊芋', '銀杏', 'とうがらし', '青豆', '黒あずき', 'キクラゲ', 'ヒラタケ', 'シイタケ(菌床)', 'シイタケ(原木)', '小ネギ', 'さつまいも／紅はるか', 'さつまいも／シルクスイート']
+      set(ref(db, 'can/'), {
+        choices: ['ちぢみ雪菜', 'つぼみ菜', 'ほうれん草', 'みぶ菜', 'アイスプラント', 'アレッタ', 'カブ', 'ケール', 'ジャガイモ／とうや', 'ジャガイモ／メークイン', 'ジャガイモ／十勝こがね', 'ヒラタケ', 'ベルギーエシャロット（訳あり）', 'ヤーコン', 'リーキ', 'リーフレタス', '小松菜', '水菜', '紅芯大根', '黒大根', '菊芋', '菜花', 'わさび', '里芋', '銀杏']
       })
     },
     changedValue (value, index) {
@@ -174,5 +181,8 @@ export default {
 .item-list {
   height: 70vh;
   overflow-y: auto;
+}
+.center{
+  text-align: center;
 }
 </style>
