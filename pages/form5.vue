@@ -1,3 +1,4 @@
+<!--飲食店の注文フォーム-->
 <template>
   <v-app>
     <h5 v-if="Uid == null" class="center">
